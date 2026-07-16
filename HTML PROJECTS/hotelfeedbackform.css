@@ -1,0 +1,593 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-gradient: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #1e1b4b 100%);
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-blur: 16px;
+    --primary: #6366f1;
+    --primary-glow: rgba(99, 102, 241, 0.35);
+    --primary-hover: #4f46e5;
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --star-active: #fbbf24;
+    --star-glow: rgba(251, 191, 36, 0.3);
+    --success: #10b981;
+    --error: #ef4444;
+    --border-radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* Background decorative glowing circles */
+.glow-circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.glow-1 {
+    top: 10%;
+    left: 15%;
+    background: var(--primary);
+}
+
+.glow-2 {
+    bottom: 10%;
+    right: 15%;
+    background: #a855f7;
+}
+
+/* Card Container */
+.feedback-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(var(--card-blur));
+    -webkit-backdrop-filter: blur(var(--card-blur));
+    width: 100%;
+    max-width: 600px;
+    border-radius: var(--border-radius);
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Progress Tracker */
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 40px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.progress-line-bg {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 3px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+}
+
+.progress-line-fill {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 3px;
+    width: 0%;
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow);
+    z-index: 2;
+    transition: var(--transition);
+}
+
+.progress-step {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #111827;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 3;
+    transition: var(--transition);
+}
+
+.progress-step.active {
+    border-color: var(--primary);
+    color: #fff;
+    background: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.progress-step.completed {
+    border-color: var(--success);
+    color: #fff;
+    background: var(--success);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+/* Form Steps */
+.form-step {
+    display: none;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.form-step.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Fieldset and Inputs styling */
+fieldset {
+    border: none;
+    outline: none;
+    margin-bottom: 25px;
+}
+
+legend {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #fff;
+    display: block;
+    width: 100%;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+/* High Premium Form Controls */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+/* Validation styling */
+.input-group.invalid input,
+.input-group.invalid textarea {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.error-message {
+    font-size: 0.8rem;
+    color: var(--error);
+    margin-top: 5px;
+    display: none;
+}
+
+.input-group.invalid .error-message {
+    display: block;
+}
+
+/* Character Counter */
+.char-counter {
+    position: absolute;
+    right: 5px;
+    bottom: -20px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.char-counter.limit-near {
+    color: var(--error);
+}
+
+/* Radio & Checkbox Enhancements */
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-box {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+    position: relative;
+}
+
+.option-box:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.option-box input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.custom-indicator {
+    height: 20px;
+    width: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+/* Radio buttons make circle indicators */
+.option-box.radio-type .custom-indicator {
+    border-radius: 50%;
+}
+
+/* Checked styling */
+.option-box input:checked ~ .custom-indicator {
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.option-box input:checked ~ .custom-indicator::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.option-box.checkbox-type input:checked ~ .custom-indicator::after {
+    content: '✓';
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #fff;
+    background: none;
+    border-radius: 0;
+}
+
+.option-box input:checked ~ span {
+    color: #fff;
+    font-weight: 500;
+}
+
+.option-box.checked-state {
+    border-color: var(--primary);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+/* Star Rating Style */
+.rating-container {
+    margin-bottom: 22px;
+}
+
+.rating-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.stars-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.star-icon {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease;
+}
+
+.star-icon:hover {
+    transform: scale(1.25);
+}
+
+.star-icon.filled {
+    color: var(--star-active);
+    text-shadow: 0 0 10px var(--star-glow);
+}
+
+.rating-text {
+    margin-left: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--star-active);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 90px;
+}
+
+/* Conditional field transition */
+.conditional-field {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease, margin 0.3s ease;
+}
+
+.conditional-field.show {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    transition: max-height 0.4s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.4s ease, margin 0.3s ease;
+}
+
+/* Navigation Buttons Container */
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+button {
+    font-family: inherit;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+    box-shadow: 0 6px 20px var(--primary-glow);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 15, 25, 0.9);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(99, 102, 241, 0.15);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.loading-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-main);
+    letter-spacing: 0.5px;
+}
+
+/* Success Card Content */
+.success-screen {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+    animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.success-screen.active {
+    display: block;
+}
+
+.checkmark-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.1);
+    border: 2px solid var(--success);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 25px;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    animation: pulseSuccess 2s infinite;
+}
+
+.checkmark-container svg {
+    width: 40px;
+    height: 40px;
+    stroke: var(--success);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawCheckmark 0.6s 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.success-screen h2 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.success-screen p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Confetti particles */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Keyframes animations */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes drawCheckmark {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes pulseSuccess {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}

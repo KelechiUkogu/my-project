@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Provide feedback on your recent stay with us. Help us improve our services." />
+    <title>Hotel Feedback Form</title>
+    <link rel="stylesheet" href="hotelfeedbackform.css" />
+</head>
+
+<body>
+    <!-- Background glowing visual accents -->
+    <div class="glow-circle glow-1"></div>
+    <div class="glow-circle glow-2"></div>
+
+    <div class="feedback-card">
+        <!-- Loading Overlay -->
+        <div class="loading-overlay">
+            <div class="spinner"></div>
+            <div class="loading-text">Submitting your feedback...</div>
+        </div>
+
+        <header>
+            <h1>Hotel Feedback Form</h1>
+            <p>Thank you for staying with us. Please provide feedback on your recent stay.</p>
+        </header>
+
+        <main>
+            <!-- Progress Tracker -->
+            <div class="progress-container">
+                <div class="progress-line-bg"></div>
+                <div class="progress-line-fill"></div>
+                <div class="progress-step active">1</div>
+                <div class="progress-step">2</div>
+                <div class="progress-step">3</div>
+                <div class="progress-step">4</div>
+            </div>
+
+            <form method="POST" action="https://hotel-feedback.freecodecamp.org">
+                <!-- STEP 1: Personal Info -->
+                <div class="form-step active">
+                    <fieldset>
+                        <legend>Personal Information</legend>
+                        <div class="input-group">
+                            <label for="full-name">Name (required):</label>
+                            <input type="text" id="full-name" name="name" placeholder="e.g., John Doe" required />
+                            <span class="error-message">Please enter your name.</span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="email">Email address (required):</label>
+                            <input placeholder="example@email.com" required id="email" type="email" name="email" />
+                            <span class="error-message">Please enter a valid email address.</span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="age">Age (optional):</label>
+                            <input type="number" name="age" id="age" min="3" max="100" placeholder="e.g., 25" />
+                            <span class="error-message">Age must be between 3 and 100.</span>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- STEP 2: Stay Experience Details -->
+                <div class="form-step">
+                    <fieldset>
+                        <legend>Was this your first time at our hotel?</legend>
+                        <div class="radio-group">
+                            <label class="option-box radio-type">
+                                <input id="yes-option" type="radio" name="hotel-stay" value="yes" required />
+                                <span class="custom-indicator"></span>
+                                <span>Yes, it was my first time</span>
+                            </label>
+                            <label class="option-box radio-type">
+                                <input id="no-option" type="radio" name="hotel-stay" value="no" required />
+                                <span class="custom-indicator"></span>
+                                <span>No, I have stayed before</span>
+                            </label>
+                        </div>
+
+                        <!-- Conditional details shown if selection is 'No' -->
+                        <div id="first-time-no-details" class="conditional-field">
+                            <div class="input-group">
+                                <label for="prior-visits">How many times have you stayed with us before?</label>
+                                <input type="number" id="prior-visits" name="prior-visits" min="1" max="100" placeholder="Number of prior stays" />
+                                <span class="error-message">Please specify the number of stays.</span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Why did you choose to stay at our hotel? (Check all that apply)</legend>
+                        <div class="checkbox-group">
+                            <label class="option-box checkbox-type">
+                                <input type="checkbox" id="ads" name="choice" value="ads" />
+                                <span class="custom-indicator"></span>
+                                <span>Social Media Ads</span>
+                            </label>
+                            <label class="option-box checkbox-type">
+                                <input type="checkbox" id="recommendation" name="choice" value="recommendation" />
+                                <span class="custom-indicator"></span>
+                                <span>Personal Recommendation</span>
+                            </label>
+                            <label class="option-box checkbox-type">
+                                <input type="checkbox" id="location" name="choice" value="location" />
+                                <span class="custom-indicator"></span>
+                                <span>Location</span>
+                            </label>
+                            <label class="option-box checkbox-type">
+                                <input checked type="checkbox" id="reputation" name="choice" value="reputation" />
+                                <span class="custom-indicator"></span>
+                                <span>Reputation</span>
+                            </label>
+                            <label class="option-box checkbox-type">
+                                <input type="checkbox" id="price" name="choice" value="price" />
+                                <span class="custom-indicator"></span>
+                                <span>Price</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- STEP 3: Ratings -->
+                <div class="form-step">
+                    <fieldset>
+                        <legend>Ratings</legend>
+
+                        <!-- Custom Interactive Service Rating -->
+                        <div class="rating-container">
+                            <span class="rating-label">How was the service?</span>
+                            <div class="stars-wrapper" id="stars-service">
+                                <span class="star-icon" data-value="1">★</span>
+                                <span class="star-icon" data-value="2">★</span>
+                                <span class="star-icon" data-value="3">★</span>
+                                <span class="star-icon" data-value="4">★</span>
+                                <span class="star-icon" data-value="5">★</span>
+                                <span class="rating-text" id="rating-text-service">Excellent</span>
+                            </div>
+                            <!-- Hidden input linked to submit form value -->
+                            <input type="hidden" name="service" id="service-input" value="5" />
+                        </div>
+
+                        <!-- Custom Interactive Food Rating -->
+                        <div class="rating-container">
+                            <span class="rating-label">How was the food?</span>
+                            <div class="stars-wrapper" id="stars-food">
+                                <span class="star-icon" data-value="1">★</span>
+                                <span class="star-icon" data-value="2">★</span>
+                                <span class="star-icon" data-value="3">★</span>
+                                <span class="star-icon" data-value="4">★</span>
+                                <span class="star-icon" data-value="5">★</span>
+                                <span class="rating-text" id="rating-text-food">Excellent</span>
+                            </div>
+                            <!-- Hidden input linked to submit form value -->
+                            <input type="hidden" name="food" id="food-input" value="5" />
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- STEP 4: Comments -->
+                <div class="form-step">
+                    <fieldset>
+                        <legend>Final Comments</legend>
+                        <div class="input-group">
+                            <label for="comments">Other Comments?</label>
+                            <textarea cols="30" rows="8" name="comments" id="comments" placeholder="We value your feedback. Tell us how we can improve..."></textarea>
+                            <span id="comments-char-count" class="char-counter">0/500</span>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- Wizard Actions Navigation -->
+                <div class="btn-container">
+                    <button type="button" class="btn-secondary" id="prev-btn">Previous</button>
+                    <button type="button" class="btn-primary" id="next-btn">Next</button>
+                    <button type="submit" class="btn-primary" id="submit-btn">Submit</button>
+                </div>
+            </form>
+
+            <!-- Success Overlay Screen -->
+            <div class="success-screen">
+                <div class="checkmark-container">
+                    <svg viewBox="0 0 52 52">
+                        <circle cx="26" cy="26" r="25" fill="none" />
+                        <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                    </svg>
+                </div>
+                <h2>Feedback Submitted!</h2>
+                <p>Thank you for taking the time to share your feedback. Your input helps us continuously improve our services and guest experiences.</p>
+                <button type="button" class="btn-primary" id="restart-btn">Submit Another Response</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="hotelfeedbackform.js"></script>
+</body>
+
+</html>
