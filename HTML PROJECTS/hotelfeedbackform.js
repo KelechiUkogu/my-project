@@ -133,6 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+
+
+
     // Comment Field Character Counter
     const commentsArea = document.getElementById('comments');
     const charCounter = document.getElementById('comments-char-count');
@@ -307,12 +311,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Simulate network latency (1.8s)
         setTimeout(() => {
             loadingOverlay.classList.remove('active');
-            
+
             // Transform form card to success state
             form.style.display = 'none';
             document.querySelector('header').style.display = 'none';
             successScreen.classList.add('active');
-            
+
             // Create nice confetti shower
             createConfettiExplosion();
         }, 1800);
@@ -323,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (restartBtn) {
         restartBtn.addEventListener('click', () => {
             form.reset();
-            
+
             // Reset option box styling
             document.querySelectorAll('.option-box').forEach(box => {
                 box.classList.remove('checked-state');
@@ -373,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createConfettiExplosion() {
         const colors = ['#6366f1', '#a855f7', '#10b981', '#fbbf24', '#f43f5e', '#3b82f6'];
         const cardRect = feedbackCard.getBoundingClientRect();
-        
+
         for (let i = 0; i < 60; i++) {
             const confetti = document.createElement('div');
             confetti.classList.add('confetti');

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dunamis Believers Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <fieldset>
+        <legend>Personal Information</legend>
+
+        <label for="name">Full Name: </label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email Address: </label>
+        <input type="email" id="email" name="name" required />
+
+        <label for="phone">Phone Number: </label>
+        <input type="tel" id="phone" name="phone" required />
+
+        <label for="gender">Gender: </label>
+        <select id="gender" name="gender" required>
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+    </fieldset>
+
+    <fieldset>
+        <legend>How did you get to know us</legend>
+
+        <label for="radio">Friends</label>
+        <input type="radio" name="source" value="friends" />
+
+        <label for="radio">Socials</label>
+        <input type="radio" name="source" value="socials" />
+
+        <label for="radio">Invitation</label>
+        <input type="radio" name="source" value="Invitation" />
+
+        <label for="radio">Others</label>
+        <input type="radio" name="source" value="Others" />
+    </fieldset>
+
+    <label for="message">Prayer Request: </label>
+    <textarea id="message" name="message"></textarea>
+
+    <button type="submit">Submit</button>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
